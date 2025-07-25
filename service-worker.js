@@ -1,7 +1,10 @@
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open('pwa-test-cache').then((cache) => {
-      return cache.addAll(['/', '/index.html']);
+    caches.open('pwa-uxuy-cache').then((cache) => {
+      return cache.addAll([
+          '.',
+          'index.html'
+        ]);
     })
   );
 });
