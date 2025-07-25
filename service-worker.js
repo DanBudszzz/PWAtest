@@ -1,9 +1,10 @@
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open('pwa-uxuy-cache').then((cache) => {
+    caches.open('pwa-nclexbuddy-cache').then((cache) => {
       return cache.addAll([
           '.',
-          'index.html'
+          'index.html',
+          'https://raw.githubusercontent.com/DanBudszzz/PWAtest/main/icon.png'
         ]);
     })
   );
