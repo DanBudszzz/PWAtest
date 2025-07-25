@@ -1,31 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PWA Test App</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add UXUY Wallet to Home Screen</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="UXUY Wallet">
+    <link rel="apple-touch-icon" href="data:image/png;base64,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">
+    <meta name="theme-color" content="#3a2d7f">
+    <style>
+        :root {
+            --text-color: #ffffff;
+            --link-color: #ffffff;
+            --iphone-bg: #1B1B1E;
+            --instruction-card-bg: rgba(255, 255, 255, 0.1);
+        }
+        html, body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+             -webkit-text-size-adjust: 100%;
+        }
+        body {
+            background: linear-gradient(135deg, #3a2d7f 0%, #2b7a9e 100%);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            display: auto;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
 
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json">
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            width: 100%;
+            max-width: 1000px;
+            flex-wrap: wrap;
+        }
+        
+        .phone-container {
+            flex-shrink: 0;
+            transform: scale(0.8);
+        }
 
-  <!-- iOS Specific -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="PWA Test">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
+        .instructions-container {
+            flex-basis: 400px;
+            flex-grow: 1;
+            text-align: left;
+            padding-left: 20px;
+        }
+        
+        .iphone-x {
+            position: relative;
+            margin: 0 auto;
+            width: 360px;
+            height: 780px;
+            background-color: var(--iphone-bg);
+            background-image: linear-gradient(60deg, #1B1B1E 1%,#1B1B1E 100%);
+            border-radius: 40px;
+            box-shadow: 0px 0px 0px 11px #1f1f1f, 0px 0px 0px 13px #191919, 0px 0px 0px 20px #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-  <!-- Theme Color -->
-  <meta name="theme-color" content="#000000">
+        .iphone-x::before,
+        .iphone-x::after{
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .iphone-x::after {
+            bottom: 7px;
+            width: 140px;
+            height: 4px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+        }
+
+        .iphone-x::before {
+            top: 0px;
+            width: 56%;
+            height: 30px;
+            background-color: #1f1f1f;
+            border-radius: 0px 0px 40px 40px;
+            z-index: 10;
+        }
+
+        .iphone-x i,
+        .iphone-x b {
+            position: absolute;
+            display: block;
+            color: transparent;
+            z-index: 10;
+        }
+
+        .iphone-x i {
+            top: 0px;
+            left: 50%;
+            transform: translate(-50%, 6px);
+            height: 8px;
+            width: 15%;
+            background-color: #101010;
+            border-radius: 8px;
+            box-shadow: inset 0px -3px 3px 0px rgba(256, 256, 256, 0.2);
+        }
+
+        .iphone-x b {
+            left: 10%;
+            top: 0px;
+            transform: translate(180px, 4px);
+            width: 12px;
+            height: 12px;
+            background-color: #101010;
+            border-radius: 12px;
+            box-shadow: inset 0px -3px 2px 0px rgba(256, 256, 256, 0.2);
+        }
+
+        .iphone-x b::after {
+            content: '';
+            position: absolute;
+            background-color: #2d4d76;
+            width: 6px;
+            height: 6px;
+            top: 2px;
+            left: 2px;
+            top: 3px;
+            left: 3px;
+            display: block;
+            border-radius: 4px;
+            box-shadow: inset 0px -2px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+            padding: 20px;
+            width: 280px;
+            z-index: 1;
+        }
+
+        .app-icon {
+            aspect-ratio: 1 / 1;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 22.5%;
+        }
+
+        .main-app-icon {
+            grid-row: 2;
+            grid-column: 2;
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAdXSURBVHhe7Vt5bFxVFJ7vrjPZ7maTdtMkEGosekIFAgklxEAiKkhUVEhAVEQoCgQK0lCREgGVChAQUYgCgYDiBYqgVEgQA7GgWKMxGqMxJmrSJmvS7uZ2Z2e+uPfMHGY+d+5udzeZtJ305D85d875nXvub+7/3O/c34aYyGQmk8l8U4x/Qe0+sL+y4lPZ2fPZ2Yvy4+M8f/hwwl7i5eUVm00/kZGR8lQqlbL2xc253XgcrvC1dFzex+03mGgqKqjBvXv3tGvXrgj2kZGRLk9P33H48CF9+vTpmgQ/efKkQk9PL729vj5+/gG9e/cOa7Ozs3/XG1ARFdXW1iYoKAhtg0ql0p+QUrK0tKTnz5+H/u1fKisrQ/L+559/aMi/tLTUJ90xMDBA3759C4fO3t7e4fH6fPjwIeB/YmLif1KAZWVlQUFBgebm5oHwLMsym42Ojhbr6uquysrKUFhY2L8zMzNkWVkZzV+0aFGGhISkX3z0xYoV6dixo0OHDj0D+B/p7e21qKhImZmZlJeXl52dfU1aCkgpyc/Ph6qRlpZWe3p66tSpU4F++qamphCAhQsXBq0pLS1t42cAFy9eTPv27RsyMjJ+4l8uLi549uwZQkJCKCwsDDu2bt0axuPHjxMS8uXg4GDfJ+V55MgRCA8PZ1hYWMTGxobY2FhHRkZQXFyMe/fuhYv33r17mZGRQWJiInp6ekhISCAkJIRz585x7do1hoaG4e3tjdOnT2NhYREaGurJkiVLsra2xrp16zIwMMCaNWswMTGByZMnk5+fT2BgIDo6OkL17t27oaOjI+j9wIEDgYl49uxZnzVrFhISEpibmwfdBw0ahIsXL9LU1ERraysikUhoaCgyMjKYPXs2nJycoO8lJSUMGDBA8fHx/PjxIxKJhNWrV2NjYwMVFRUYGBjI9u3bcfDgQYSEhBAVFYXPnz/z/v376/Ly2bNnmZubQ1JSUqD+ypUrFR8fT1FREW3btkVgYCDu37+Ph4cHcnJyaNasGVpaWoKCgsLDwwNfX19ERkaybNkyxMXF8ezZMyIjI6murqalpQVSUlJYvHix4ubmZs6dOwcFBQVhWdC7zMxMJk6ciIuLC1JSUnj27BnTp0+noKAAZ86cITExkcbGRtLT03n+/DkWFhYYHBykuLgYKysrjBo1ivLyctLS0nDq1CkWFhaIj4+noKCAs2fP0tzcjKenJwYGBtjSpc85duwYt27dIjIykvLyciorKwkMDOT48eOkpqby9OkTampqgYjExETWrVvH9u3bSU5OZt68eVy4cAERkZ6ezpEjRxgUFGRsbAwZGRlkZGSwZs0aYmJiSE5OZmhoCAkJCYSHh7No0SIIiKmpKbNnz+bevXsUFBRQXFyMoqIiSkpKkJSUJDExkQULFvDDhw/s3r0bYWFhrFmzBoGBgSxduhSzs7OpqamhpaUFsbGxLFiwAKenp9y4cYPVq1czYMAAxo0bR0hICISEhJiSksKYMWMI+g8aNKhP3r7wwYMHHjhwwE+fPtG1a9fw9fX1zMxM7HY7RkdHsXjxYoKCgsLDw8PFxQVr1qwhIyOD2NhY5s+fj8nJSVJTU9m2bRuhoaEYGRnh8ePHrFy5ksDAQLy8vHDv3j329vbYsmUL7t27R1lZGUVFRYwfP56WlhZevnyJx48fk5ycTFpaGgsXLsRkMia3v7+/ZWVl7NixA3FxcXz48IGjR4/y6tUrzpw5Q3R0NKtWrWLo0KEEBAQwffp0EhISgXbOnz/PggULApcTExMJCAjgq1evWLlyJaKjo5k3bx69evUiKioKSUlJLFy4EDExMaSlpZGZmcmSJUuIjIzke/fuISgoCHd3d4wcOZJt27bx9u1bUlJSSEpKIiwsjNWrV/P69Wt2dnYYGhrC3t7et2zZwq5du+Dp6Ym9vT1GRkZoamoKDg5GXV2dnZ1dhBDExMRw4cIFOjo6gCqGh4cTHx/P4MGD8fb2xsrKCgUFBcyfPx9X1y6WlZWRmprKtGnTmDFjBldXV5SWlvLw4UMGBwdxuVw4OzujpaWFlZVV7OzsYDAY4e/vT0FBAVu3buXWrVvcunWLYcOGERMTg4mJSYyMjJCbm8sff/yBxcVFPvvsMyIjIzk+Pp76+nqampqwWCzY2Njg+PHjnD59moKCArZu3YqDg4P5+fkA5dOnTzM5OYnRaHRwcMDW1lbg/z9uNho1Go22o0SjUbfbbXh4OAaDAWtra1xcXPj7+wPvHxoaIiUlBS0tLURERHDixAnWrVvHkSNHmDBhAsLCwhgdHQX529va4uTkBEdHRwgMDGTt2rUMGTIEh4cHcnJy+PXXXwkMDMTZ2RmDweD3R2Ox2Gw2GgwGg4G+NBrNAYVCERkZGZSXlwcFBQUA/fvv3/+Ehd07dOiQYmNj+fnnn3n06BGRkZFkZmaiaDQaDAby8/NxOp2IjIzE6XQeOXKExYsX88UXXwDs/fbtWwwGAyMjoygqKmLp0qVwcXFhYWGBLVu2MDExgbOzswx2KigoQElJCcXFxcTExPDrr7+SmprKli1bWLduHZmZmexr68lksl+kL3xTjP/h/6d+Y+Pj44lEIgF7t7W1UVRURGxsrJ/y/g33f/PNN/g/f/782dPTc62urv67+gP1f1J/KovLzT4R1N/9e1/eN+N/Y/z5M/w/4f/zV+S3HwV5/M89z/8H21fK5s6V4q8AAAAASUVORK5CYII=");
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+        .instructions {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+        .instructions li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: var(--instruction-card-bg);
+            padding: 15px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 20px;
+        }
+        .instructions .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            margin: 0 8px;
+        }
+        .instructions .icon img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .instructions .text-icon-wrapper {
+             display: inline-flex;
+             align-items: center;
+             gap: 8px;
+             margin-left: 4px;
+        }
+        .instructions .link-text {
+            color: var(--link-color);
+            font-weight: 500;
+        }
+
+        @media (max-width: 860px) {
+            .main-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .phone-container {
+                transform: scale(0.7);
+            }
+            .instructions-container {
+                text-align: center;
+                padding-left: 0;
+            }
+             .instructions {
+                display: inline-block;
+                text-align: left;
+             }
+             h1 {
+                font-size: 24px;
+             }
+             .instructions li {
+                font-size: 18px;
+             }
+        }
+    </style>
 </head>
 <body>
-  <h1>PWA Test App</h1>
-  <p>This is a test PWA. Add it to your home screen to see it in action!</p>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log('Service Worker Registered'))
-        .catch(err => console.error('SW Registration Failed', err));
-    }
-  </script>
+    <div class="main-container">
+        <div class="phone-container">
+            <div class="iphone-x">
+                <i>Speaker</i>
+                <b>Camera</b>
+                <div class="app-grid">
+                    <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                    <div class="app-icon"></div><div class="app-icon main-app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                    <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                    <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                </div>
+            </div>
+        </div>
+        <div class="instructions-container">
+            <h1>Add UXUY Wallet to your Home Screen</h1>
+            <ol class="instructions">
+                <li>
+                    1.&nbsp;Tap 
+                    <span class="icon">
+                         <img src="data:image/svg+xml,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 5L12 16M12 5L8 9M12 5L16 9' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M5 12V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V12' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'/></svg>" alt="Share Icon"/>
+                    </span>
+                     in the tool bar
+                </li>
+                <li>
+                    2.&nbsp;Select 
+                    <span class="text-icon-wrapper">
+                        <span class="icon">
+                            <img src="data:image/svg+xml,<svg width='20' height='20' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 5V19M5 12H19' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round'/></svg>" alt="Add Icon"/>
+                        </span>
+                        <span class="link-text">Add to Home Screen</span>
+                    </span>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(reg => console.log('Service worker registered.', reg))
+                    .catch(err => console.error('Service worker registration failed:', err));
+            });
+        }
+    </script>
 </body>
 </html>
